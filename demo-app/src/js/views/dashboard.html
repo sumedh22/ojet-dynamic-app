@@ -3,9 +3,22 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-padding">
-    <h1>Dashboard Content Area</h1>
-    <div>
-        <dynamic-form>
-        </dynamic-form>
+    <h1>Dynamic form</h1>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-sm-6">
+            <oj-validation-group id="tracker">
+                <dynamic-form metadata="[[metadata]]" value="{{value}}">
+                </dynamic-form>
+            </oj-validation-group>
+            <oj-button on-oj-action="[[submit]]">Submit</oj-button>
+        </div>
+        <div class="oj-flex-item oj-sm-6">
+            <label>Value</label>
+            <pre>
+                <code>
+                    <oj-bind-text value="[[JSON.stringify(value(),0,2)]]"></oj-bind-text>
+                </code>
+            </pre>
+        </div>
     </div>
 </div>

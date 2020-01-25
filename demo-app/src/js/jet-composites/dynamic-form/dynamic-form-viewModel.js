@@ -20,7 +20,7 @@ define([
         date: 'ojs/ojdatetimepicker',
         'oj-text-area': 'ojs/ojinputtext',
         'oj-select-one': 'ojs/ojselectcombobox',
-        'oj-switch': 'ojs/ojswitch'
+        'oj-switch': 'ojs/ojswitch',
     }
 
     function DynamicForm(context) {
