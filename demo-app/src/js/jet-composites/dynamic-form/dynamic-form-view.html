@@ -1,5 +1,26 @@
-<!--
-  Copyright (c) 2015, 2019, Oracle and/or its affiliates.
-  The Universal Permissive License (UPL), Version 1.0
--->
-<p><oj-bind-text value="[[messageText]]"></oj-bind-text></p>
+<oj-validation-group :id="[[_validationGroupId]]" on-valid-changed="[[setValid]]">
+    <oj-form-layout :id="[[_formId]]">
+        <oj-bind-for-each data="{{_metadataArr}}">
+            <template>
+      <oj-bind-if test="[[getType($current.data) == 'string']]">
+        <oj-input-text  value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]" ></oj-input-text>
+      </oj-bind-if>
+      <oj-bind-if test="[[getType($current.data) == 'number']]">
+        <oj-input-number value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]"></oj-input-number>
+      </oj-bind-if>
+      <oj-bind-if test="[[getType($current.data) == 'date']]">
+        <oj-input-date  value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]" ></oj-input-date>
+      </oj-bind-if>
+      <oj-bind-if test="[[getType($current.data) == 'oj-text-area']]">
+        <oj-text-area   value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]"></oj-text-area>
+      </oj-bind-if>
+      <oj-bind-if test="[[getType($current.data) == 'oj-select-one']]">
+        <oj-select-one disabled="[[readonly]]" placeholder="" value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]"></oj-select-one>
+      </oj-bind-if>
+      <oj-bind-if test="[[getType($current.data) == 'oj-switch']]">
+      <oj-switch disabled="[[readonly]]" value="{{_value[$current.data.attribute]}}" :id="[[$current.data.id]]"></oj-switch>
+      </oj-bind-if >
+    </template>
+        </oj-bind-for-each>
+    </oj-form-layout>
+</oj-validation-group>
