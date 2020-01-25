@@ -1,0 +1,8 @@
+dynamic-form:not(.oj-complete){
+  visibility: hidden;
+}
+
+dynamic-form{
+	min-height: 50px;
+	width: 50px;
+}
