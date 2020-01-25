@@ -1,8 +1,8 @@
 # Custom Dynamic Form
 custom dynamic form built using Oracle JET
 
-#Installation 
+# Installation 
 ojet restore
 
-#Run
+# Run
 ojet serve
