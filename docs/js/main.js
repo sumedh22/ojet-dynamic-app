@@ -10,21 +10,20 @@
  * Example of Require.js boostrap javascript
  */
 
- // The UserAgent is used to detect IE11. Only IE11 requires ES5.
-(function () {
-  
-  function _ojIsIE11() {
-    var nAgt = navigator.userAgent;
-    return nAgt.indexOf('MSIE') !== -1 || !!nAgt.match(/Trident.*rv:11./);
-  };
-  var _ojNeedsES5 = _ojIsIE11();
+// The UserAgent is used to detect IE11. Only IE11 requires ES5.
+(function() {
 
-  requirejs.config(
-    {
-      baseUrl: 'js',
+    function _ojIsIE11() {
+        var nAgt = navigator.userAgent;
+        return nAgt.indexOf('MSIE') !== -1 || !!nAgt.match(/Trident.*rv:11./);
+    };
+    var _ojNeedsES5 = _ojIsIE11();
 
-      // Path mappings for the logical module names
-      paths:
+    requirejs.config({
+        baseUrl: 'js',
+
+        // Path mappings for the logical module names
+        paths:
 // injector:mainReleasePaths
 
 {
@@ -52,8 +51,7 @@
 }
 
 // endinjector
-    }
-  );
+    });
 }());
 
 /**
@@ -63,31 +61,31 @@
  * object in the callback
  */
 require(['ojs/ojbootstrap', 'knockout', 'appController', 'ojs/ojlogger', 'ojs/ojrouter', 'ojs/ojknockout',
-  'ojs/ojmodule', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar'],
-  function (Bootstrap, ko, app, Logger, Router) { // this callback gets executed when all required modules are loaded
-    Bootstrap.whenDocumentReady().then(
-      function() {
+        'ojs/ojmodule', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar'
+    ],
+    function(Bootstrap, ko, app, Logger, Router) { // this callback gets executed when all required modules are loaded
+        Bootstrap.whenDocumentReady().then(
+            function() {
 
-        function init() {
-            Router.sync().then(
-              function () {
-                app.loadModule();
-                // Bind your ViewModel for the content of the whole page body.
-                ko.applyBindings(app, document.getElementById('globalBody'));
-              },
-              function (error) {
-                Logger.error('Error in root start: ' + error.message);
-              }
-            );
-          }
+                function init() {
+                    Router.sync().then(
+                        function() {
+                            // Bind your ViewModel for the content of the whole page body.
+                            ko.applyBindings(app, document.getElementById('globalBody'));
+                        },
+                        function(error) {
+                            Logger.error('Error in root start: ' + error.message);
+                        }
+                    );
+                }
 
-          // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready
-          // event before executing any code that might interact with Cordova APIs or plugins.
-          if (document.body.classList.contains('oj-hybrid')) {
-            document.addEventListener("deviceready", init);
-          } else {
-            init();
-          }
-        });
-  }
+                // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready
+                // event before executing any code that might interact with Cordova APIs or plugins.
+                if (document.body.classList.contains('oj-hybrid')) {
+                    document.addEventListener("deviceready", init);
+                } else {
+                    init();
+                }
+            });
+    }
 );
