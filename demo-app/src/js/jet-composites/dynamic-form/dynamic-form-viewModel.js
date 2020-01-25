@@ -48,7 +48,6 @@ define([
 
         self.readonly = ko.observable(context.properties.readonly);
 
-        self.rules = context.properties.rules || {};
         self._value = {};
 
         self._metadataArr = ko.observableArray();
@@ -84,14 +83,6 @@ define([
                 require([REQUIRE_PATHS[self.getType(prop)]], function() {
                     self._metadataArr.push(prop);
                     self.applyProperties(prop.id, prop);
-                    if (self.rules[attribute]) {
-                        document.getElementById(prop.id).addEventListener(
-                            self.rules[attribute].attr + 'Changed',
-                            function(event) {
-                                self.executeRule.bind(self)(event.detail.value,
-                                    self.rules[attribute].change, prop)
-                            })
-                    }
                     resolve();
                 })
             } catch (err) {
@@ -101,36 +92,13 @@ define([
 
     };
 
-    DynamicForm.prototype.executeRule = function(value, changes, props) {
-        var self = this;
-        changes.forEach(function(change) {
-            Context.getContext(document.getElementById(self.getAttributeId(
-                change.field))).getBusyContext().whenReady().then(function() {
-                document.getElementById(self.getAttributeId(change.field))
-                    .setProperty(
-                        change.attr, eval(change.value))
-            })
 
-        })
-    }
-    DynamicForm.prototype.runRulesOnInit = function(metadata, value) {
-            var self = this;
-            var fields = Object.keys(metadata.properties);
-            fields.forEach(function(field) {
-                if (value[field]()) {
-                    if (self.rules[field]) {
-                        self.executeRule(value[field](), self.rules[field].change)
-                    }
-
-                }
-            })
-        }
-        /**
-         * Returns the field type to be used to render the attribute
-         * 
-         * @param {type} field
-         * @return {undefined}
-         */
+    /**
+     * Returns the field type to be used to render the attribute
+     * 
+     * @param {type} field
+     * @return {undefined}
+     */
     DynamicForm.prototype.getType = function(field) {
         var type = field.controlType || field.type;
         if (field.options && type == 'string') {
@@ -178,9 +146,6 @@ define([
             _loop(i, p);
         }
         fieldResolve();
-        setTimeout(function() {
-            self.runRulesOnInit(metadata, self._value);
-        }, 2000)
         ko.computed(function() {
             return ko.toJSON(self._value);
         }).subscribe(function(value) {
@@ -297,15 +262,6 @@ define([
         return obj;
     }
 
-    DynamicForm.prototype.format = function(field, value) {
-        var self = this;
-        var el = document.getElementById(self.getAttributeId(field));
-        if (el && el.format) {
-            return el.format(value);
-        } else {
-            return value;
-        }
-    }
 
     return DynamicForm;
 });
