@@ -1,0 +1,106 @@
+{
+    "name": "dynamic-form",
+    "version": "1.0.0",
+    "jetVersion": "^8.0.0",
+    "displayName": "Dynamic Form",
+    "description": "A component that renders form based on the specified metadata",
+    "properties": {
+        "direction": {
+            "type": "string",
+            "enumValues": [
+                "column",
+                "row"
+            ],
+            "value": "column"
+        },
+        "displayProperties": {
+            "type": "Array<string|object>",
+            "description": "fields to display"
+        },
+        "expanded": {
+            "type": "object",
+            "writeback": true
+        },
+        "labelEdge": {
+            "type": "string",
+            "enumValues": [
+                "start",
+                "top"
+            ],
+            "value": "top"
+        },
+        "labelWidth": {
+            "type": "string",
+            "value": "33%"
+        },
+        "labelWrapping": {
+            "type": "string",
+            "enumValues": [
+                "truncate",
+                "wrap"
+            ],
+            "value": "wrap"
+        },
+        "maxColumns": {
+            "type": "number",
+            "value": 1
+        },
+        "metadata": {
+            "type": "object",
+            "description": "dynamic form metadata"
+        },
+        "readonly": {
+            "type": "boolean"
+        },
+        "value": {
+            "type": "Object",
+            "description": "dynamic form value",
+            "writeback": true
+        },
+        "valid": {
+            "type": "string",
+            "enumValues": [
+                "valid",
+                "invalidShown",
+                "invalidHidden",
+                "pending"
+            ],
+            "valid": "valid",
+            "readOnly": true,
+            "writeback": true
+        },
+        "componentPaths": {
+            "type": "array<object>",
+            "properties": {
+                "name": "string",
+                "requirePath": "string"
+            }
+        },
+        "rules": {
+            "type": "object"
+        },
+        "property": {
+            "type": "array"
+        }
+    },
+    "methods": {
+        "isValid": {},
+        "showMessages": {},
+        "focusOn": {
+            "params": [{
+                "name": "at",
+                "type": "string"
+            }]
+        },
+        "print": {
+            "return": "object"
+        },
+        "format": {
+            "return": "string"
+        }
+    },
+    "events": { "lastTabOut": {} },
+    "slots": {
+
+    }
+}
