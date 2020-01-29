@@ -41,7 +41,8 @@
             'css': 'libs/require-css/css',
             'touchr': 'libs/touchr/touchr',
             'corejs': 'libs/corejs/shim',
-            'regenerator-runtime': 'libs/regenerator-runtime/runtime'
+            'regenerator-runtime': 'libs/regenerator-runtime/runtime',
+            'vs': 'libs/monaco'
         }
         // endinjector
     });
