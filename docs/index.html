@@ -47,43 +47,52 @@
 </head>
 
 <body class="oj-web-applayout-body">
-    <!-- Template for rendering navigation items -->
-    <script type="text/html" id="navTemplate">
-        <li>
-            <a href="#">
-                <span :class="[[$data['iconClass']]]"></span>
-                <oj-bind-text value="[[$data['name']]]"></oj-bind-text>
-            </a>
-        </li>
-    </script>
-
-    <div id="globalBody" class="oj-web-applayout-page">
+    <h1>Dynamic form</h1>
+    <div class="oj-flex-item oj-sm-12" class="oj-web-applayout-page">
+        <div id="binding" class="oj-hybrid-padding"></div>
+    </div>
+    <div id="globalBody">
         <div class="oj-hybrid-padding">
-            <h1>Dynamic form</h1>
+
             <div class="oj-flex">
-                <div class="oj-flex-item oj-sm-6">
-                    <oj-validation-group id="tracker">
-                        <dynamic-form metadata="[[metadata]]" value="{{value}}">
-                        </dynamic-form>
-                    </oj-validation-group>
-                    <oj-button on-oj-action="[[submit]]">Submit</oj-button>
-                </div>
-                <div class="oj-flex-item oj-sm-6">
-                    <label>Value</label>
-                    <pre>
-                    <code>
-                        <oj-bind-text value="[[JSON.stringify(value(),0,2)]]"></oj-bind-text>
-                    </code>
-                </pre>
-                </div>
+                <oj-tab-bar class="oj-flex-bar-start" id="hnavlist" edge="top" selection="{{selectedEditor}}">
+                    <ul>
+                        <li id="js">
+                            <a href="#" aria-controls="home-tab-panel" id="home-tab">
+                        JS Model
+                      </a>
+                        </li>
+                        <li id="html">
+                            <a href="#" aria-controls="blogs-tab-panel" id="blogs-tab">
+                        HTML View
+                      </a>
+                        </li>
+                    </ul>
+                </oj-tab-bar>
+                <oj-toolbar chroming="solid" class="oj-flex-bar-end">
+                    <oj-button on-oj-action="[[applyHandler]]" class="oj-button-primary">Apply</oj-button>
+                    <oj-button on-oj-action="[[resetHandler]]">Reset to Default</oj-button>
+                    <oj-button on-oj-action="[[formatHandler]]">Format Code</oj-button>
+                </oj-toolbar>
+                <oj-switcher value="[[selectedEditor]]">
+                    <div slot="js" class="oj-flex-item oj-sm-12">
+                        <div id="jsContainer" style="width:100vw;height:50vh"></div>
+                    </div>
+                    <div slot="html" class="oj-flex-item oj-sm-12">
+                        <div id="htmlContainer" style="width:100vw;height:50vh"></div>
+                    </div>
+                </oj-switcher>
+
             </div>
         </div>
 
     </div>
 
-    <script type="text/javascript" src="js/libs/require/require.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+
 
 </body>
+<script type="text/javascript" src="js/libs/require/require.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
 
 </html>

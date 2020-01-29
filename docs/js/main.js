@@ -27,6 +27,7 @@
 // injector:mainReleasePaths
 
 {
+  "vs":"libs/vs",
   "knockout":"libs/knockout/knockout-3.5.0.debug",
   "jquery":"libs/jquery/jquery-3.4.1",
   "jqueryui-amd":"libs/jquery/jqueryui-amd-1.12.1",
